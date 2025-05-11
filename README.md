@@ -1,5 +1,5 @@
-# EnvironmentSetup
-Java Setup
+# Environment setup
+## Java Setup
 1. Download JDK
 2. Set environment variable JAVA_HOME to where jdk is saved
 3. Add %JAVA_HOME%\bin to PATH variable
@@ -17,3 +17,5 @@ Make IntelliJ project Maven project
 
 Where is .m2 folder?
 Simply run mvn clean install, and you can see it under C:\Users\<YourUsername>\.m2\
+
+# Project setup
