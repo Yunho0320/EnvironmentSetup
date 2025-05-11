@@ -67,8 +67,8 @@ Module pom.xml looks like this
     </properties>
 </project>
 ```
-3. In Project Structure > Modules, click one of the modules, then Paths.Set the Output path to like this C:\Dev\Workspace\personal_projects\ModularProgramming\example_1\target\classes - target directory done.
-4. .idea files explain:
+2. In Project Structure > Modules, click one of the modules, then Paths.Set the Output path to like this C:\Dev\Workspace\personal_projects\ModularProgramming\example_1\target\classes - target directory done.
+3. .idea files explain:
 * gitignore: git ignore rules
 * compiler.xml - compiler settings such as JDK version, annotation processing etc - this is machine specific
 * JarRepositories - Tracks external JAR repositories - this is user specific
@@ -137,5 +137,5 @@ Untracked files:
 However, in intelliJ, under commit, I still see all the files in .idea under Unversioned Files & Changes.
 So I pushed my gitignore file again but they are still showing up.
 Turned out intelliJ showing files in Commit UIs (under Changes & Unversioned Files) has got nothing to do with Git. So our implementation is correct and has worked. <br/>
-So it was a bit annoying that I still see them under Unversioned Files but the solution was quite simple.... When I right clicked each file, there was gitignore button and I could put them in exclude file and they no longer showed up
-5. 
+But it was a bit annoying that I still see them under Unversioned Files but the solution was quite simple.... When I right clicked each file, there was gitignore button and I could put them in exclude file and they no longer showed up
+
