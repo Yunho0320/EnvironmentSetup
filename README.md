@@ -78,7 +78,7 @@ Module pom.xml looks like this
 * workspace.xml - UI layout, editor state, breakpoints, open files
 
 Remove kotlin.xml and put all of them into gitignore except modules.xml.We also want to git ignore Maven build output(target directory) and some OS specific files & logs, and temp files.
-Write gitignore as below: 
+Write gitignore as below & push it: 
 ```
 # Default ignored files
 /shelf/
@@ -111,5 +111,31 @@ git rm -r --cached .idea
 // -r: recusively so that it applies to all files inside .idea
 // --cached: telling git to remove from Git's version control but keep the files on our disk
 ```
+For my case, I accidentally commited all the files in .idea after the initial push so I had to do as below:
+```
+git reset HEAD  // This unstages all the files that are staged for commit
+```
+When I run git status, I'm getting these messages that it's good because I can ./idea is now untracked.
+```
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        deleted:    .idea/ModularCoding.iml
+        deleted:    .idea/misc.xml
+        deleted:    .idea/modules.xml
+        deleted:    .idea/vcs.xml
 
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .idea/
+        example_1/example_1.iml
+        example_1/pom.xml
+        example_1/target/
+        example_2/example_2.iml
+        example_2/pom.xml
+        pom.xml
+```
+However, in intelliJ, under commit, I still see all the files in .idea under Unversioned Files & Changes.
+So I pushed my gitignore file again but they are still showing up.
+Turned out intelliJ showing files in Commit UIs (under Changes & Unversioned Files) has got nothing to do with Git. So our implementation is correct and has worked. <br/>
+So it was a bit annoying that I still see them under Unversioned Files but the solution was quite simple.... When I right clicked each file, there was gitignore button and I could put them in exclude file and they no longer showed up
 5. 
