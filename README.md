@@ -20,6 +20,7 @@ It's in C:\Users\<YourUsername>\.m2\. If it's not there, simply run mvn clean in
 
 # Project setup (Multi-module project)
 For this one, we need one parent pom.xml and each pom.xml for each module. 
+Parent pom looks like this.
 '''
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -33,10 +34,32 @@ For this one, we need one parent pom.xml and each pom.xml for each module.
     <packaging>pom</packaging>
 
     <modules>
-        <module>server</module>
-        <module>ui</module>
+        <module>module1</module>
+        <module>module2</module>
     </modules>
 </project>
 
 '''
+
+Module pom looks like this.
+'''
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.yunho-test</groupId>
+        <artifactId>MarkdownParser</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>module1</artifactId>
+'''
+
+# Full stack setup
+Initially I set up exactly same as Multi-module project as above, but there was an issue <br>
+I had one 'server' module and one 'ui'module, each supporting backend and frontend respectively.
+The issue was that ui pom.xml didn't really have Maven config in it. 
 
