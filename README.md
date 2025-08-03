@@ -41,7 +41,7 @@ Parent pom looks like this.
 
 '''
 
-Module pom looks like this.
+Module pom's basic format looks like this.
 '''
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -58,8 +58,77 @@ Module pom looks like this.
     <artifactId>module1</artifactId>
 '''
 
-# Full stack setup
-Initially I set up exactly same as Multi-module project as above, but there was an issue <br>
-I had one 'server' module and one 'ui'module, each supporting backend and frontend respectively.
-The issue was that ui pom.xml didn't really have Maven config in it. 
+# Full stack setup - my mistake & solution
+For my full stack web setup, I did exactly same as Multi-module project as above, but there was an issue. <br>
+I had one 'server' module and one 'ui'module, each supporting backend and frontend respectively. <br>
+This ui pom.xml was exactly same as the basic format above, and it didn't really have Maven config in it. <br>
+To show my mistake, I'll share as below.
 
+Java backend module
+'''
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.yunho-test</groupId>
+        <artifactId>MarkdownParser</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>server</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.32</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>
+'''
+
+UI frontend module
+'''
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.yunho-test</groupId>
+        <artifactId>MarkdownParser</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>ui</artifactId>
+
+</project>
+'''
+
+Main pom.xml
+'''
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.yunho-test</groupId>
+    <artifactId>MarkdownParser</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>server</module>
+        <module>ui</module>
+    </modules>
+</project>
+'''
+
+It works perfectly fine locally but with this setup, to deploy to prod, I need to create a JAR for backend and dist folder, because my dist folder isn't included in the JAR. <br>
+So let's tweak it a bit so that when we deploy, it only creates one single JAR that also contains dist (vue build). <br>
